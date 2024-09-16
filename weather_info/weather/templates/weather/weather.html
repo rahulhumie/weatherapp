@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather and Pollution Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            position: relative; /* Ensure the container is positioned relatively for the absolute positioning of the button */
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            font-size: 18px;
+        }
+        .contact-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Check Weather and Pollution</h1>
+
+    <!-- Contact Me Button positioned at the top-right corner -->
+    <a href="https://www.linkedin.com/in/rahul-das-2752b1248/"  target="blank" class="contact-btn" style="text-decoration: none;" >
+        <button>Contact Me</button>
+    </a>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Get Info</button>
+    </form>
+
+    {% if weather_data %}
+        <h2>City: {{ form.cleaned_data.city }}</h2>
+        <p>Temperature: {{ weather_data.temperature }} °C</p>
+        <p>Rain: {{ weather_data.rain }}</p>
+        <p>Pollution Level (AQI): {{ weather_data.pollution }}</p>
+    {% endif %}
+</body>
+</html>
